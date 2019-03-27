@@ -1,0 +1,8 @@
+message("in lib####################3333")
+message(${CMAKE_CURRENT_SOURCE_DIR})
+message(${CMAKE_CURRENT_BINARY_DIR})
+#SET(LIB_SRC hello.cpp)
+aux_source_directory(. LIB_SRC)
+add_library(libhello ${LIB_SRC})
+set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+set_target_properties(libhello PROPERTIES out_name "hello")

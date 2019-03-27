@@ -1,0 +1,11 @@
+project(hello)
+message(${PROJECT_SOURCE_DIR})
+message(${PROJECT_BINARY_DIR})
+message(${CMAKE_CURRENT_SOURCE_DIR})
+
+set(APP_SRC main.cpp)
+set(LIB_SRC hello.cpp)
+add_library(libhello ${LIB_SRC})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
+add_executable(hello ${APP_SRC})
+target_link_libraries(hello libhello)

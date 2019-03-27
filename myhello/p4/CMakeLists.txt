@@ -1,0 +1,6 @@
+project(hello)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+set(CMAKE_VERBOSE_MAKEFILE ON)
+#add_definitions("-g++")
+add_subdirectory(${PROJECT_SOURCE_DIR}/libhello)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src)

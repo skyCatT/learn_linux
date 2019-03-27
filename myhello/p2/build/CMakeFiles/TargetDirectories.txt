@@ -1,0 +1,3 @@
+/home/zhxh/mystudy/linux/cmake/myhello/p2/build/CMakeFiles/rebuild_cache.dir
+/home/zhxh/mystudy/linux/cmake/myhello/p2/build/CMakeFiles/hello.dir
+/home/zhxh/mystudy/linux/cmake/myhello/p2/build/CMakeFiles/edit_cache.dir

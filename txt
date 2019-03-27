@@ -1,0 +1,61 @@
+cmake_minmus_required(VERSION 2.8)
+project(demo)
+
+#single file
+aux_source_directory(. DIR_SRCS)
+add_executable(demo DIR_SRCS)
+set_target_properties (testFunc_shared PROPERTIES OUTPUT_NAME "testFunc")
+
+#multidirectory multi-file
+
+add_libraries(biz_handler STATIC|SHARED ${SRC_FILES})
+SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/../lib) 上面的语句能设置库文件的输出目录
+
+————————————————————————————————————
+BUILD_SHARED_LIBS
+这个开关用来控制默认的库编译方式,如果不进行设置,使用 ADD_LIBRARY 并没有指定库
+类型的情况下,默认编译生成的库都是静态库。
+如果 SET(BUILD_SHARED_LIBS ON)后,默认生成的为动态
+————————————————————————————————————
+
+add_subdirectory(math)
+add_executable(Demo main.cc)
+set (EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+
+
+target_link_libraries(Demo MathFunctions)
+
+#**************************************************************************************************
+# 
+message([SEND_ERROR | STATUS | FATAL_ERROR] "message to display" ...)
+
+
+#
+SET(CMAKE_C_FLAGS_DEBUG "-g -Wall") 设置编译器的类型
+          CMAKE_C_FLAGS_DEBUG            ----  C 编译器
+          CMAKE_CXX_FLAGS_DEBUG        ----  C++ 编译器
+
+
+#. set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../bin) 
+上面两条语句分别设置了Debug版本和Release版本可执行文件的输出目录,一旦设置上面的属性,在任何环境下生成的可执行文件都将直接放在你所设置的目录.
+
+ 
+#.  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../lib) 
+上面两条语句分别设置了Debug版本和Release版本库文件的输出目录,一旦设置上面的属性,在任何环境下生成的库文件都将直接放在你所设置的目录.
+
+ 
+#. set(CMAKE_RELEASE_POSTFIX "_r") 
+上面两条语句分别设置了Debug版本和Release版本下库文件的后缀名. 
+
+#. set_target_properties(${TARGET_NAME} PROPERTIES RELEASE_POSTFIX "_r") 
+上面两条语句分别设置了Debug版本和Release版本下可执行文件的后缀名.
+
+#**********************************************************************************************************************
+通俗一点,内部构建就是在项目内部,有CMakeList.txt的地方,直接cmake .,比如我们前面讲的简单案例都是最简单的内部构建. 结果你也看见了,就是在项目下面生成了很多的临时文件.
+
+外部构建就是不直接在项目下面运行cmake, 而是自己建立一个接受cmake之后的临时文件的文件夹,然后再该文件夹下面调用cmake <CMakeList_path> 来构建.运行 make 构建工程，就会在当前目录(build 目录)中获得目标文件 hello。上述过程就是所谓的out-of-source外部编译，一个最大的好处是，对于原有的工程没有任何影响，所有动作全部发生在编译目录
+
+CMake语法
+A. 变量使用${}方式取值,但是在 IF 控制语句中是直接使用变量名；
+B. 指令(参数 1 参数 2…)，参数使用括弧括起,参数之间使用空格或分号分开；
+C. 指令是大小写无关的,参数和变量是大小写相关的。但,推荐你全部使用大写指令。
